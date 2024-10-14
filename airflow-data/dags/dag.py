@@ -4,6 +4,7 @@ from airflow.models import Variable
 from datetime import datetime
 import sqlite3
 import pandas as pd
+from example_desafio import export_final_answer 
 
 # 1. Crie uma task que lê os dados da tabela 'Order' do banco de dados disponível em data/Northwhind_small.sqlite. O formato do banco de dados é o Sqlite3. Essa task deve escrever um arquivo chamado "output_orders.csv".
 
@@ -40,11 +41,6 @@ def calculate_quantity_for_rio():
 # 5. Você deve conseguir rodar o DAG sem erros e gerar o arquivo final_output.txt com apenas um texto codificado gerado automaticamente pela task export_final_output.
 
 # 3. Função que exporta o resultado final para "final_output.txt".
-def export_final_output():
-    with open('/Users/corinabachmann/indicium/airflow_tooltorial/airflow-data/dags/count.txt', 'r') as f:
-        content = f.read()
-    with open('/Users/corinabachmann/indicium/airflow_tooltorial/airflow-data/dags/final_output.txt', 'w') as f_out:
-        f_out.write(content)
 
 # 4. Definição do DAG.
 default_args = {
@@ -71,7 +67,7 @@ with DAG(
 
     final_task = PythonOperator(
         task_id='export_final_output',
-        python_callable=export_final_output
+        python_callable=export_final_answer
     )
 
     # Definindo a ordem de execução

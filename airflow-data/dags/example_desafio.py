@@ -24,7 +24,7 @@ def export_final_answer():
     import base64
 
     # Import count
-    with open('count.txt') as f:
+    with open('/Users/corinabachmann/indicium/airflow_tooltorial/airflow-data/dags/count.txt') as f:
         count = f.readlines()[0]
 
     my_email = Variable.get("my_email")
@@ -33,7 +33,7 @@ def export_final_answer():
     base64_bytes = base64.b64encode(message_bytes)
     base64_message = base64_bytes.decode('ascii')
 
-    with open("final_output.txt","w") as f:
+    with open("/Users/corinabachmann/indicium/airflow_tooltorial/airflow-data/dags/final_output.txt","w") as f:
         f.write(base64_message)
     return None
 ## Do not change the code above this line-----------------------##
